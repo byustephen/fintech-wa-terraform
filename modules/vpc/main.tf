@@ -93,7 +93,7 @@ resource "aws_route_table" "primary-public-route-table" {
   }
 }
 
-#Provate Route Table
+#Private Route Table
 resource "aws_route_table" "primary-private-route-table" {
   vpc_id = aws_vpc.main.id
 
@@ -107,7 +107,6 @@ resource "aws_route_table" "primary-private-route-table" {
   }
 }
 
-
 #Route table Associations
 resource "aws_route_table_association" "primary-public-route-table-association-a" {
   subnet_id      = aws_subnet.subnet-a.id
@@ -117,6 +116,11 @@ resource "aws_route_table_association" "primary-public-route-table-association-a
 resource "aws_route_table_association" "primary-public-route-table-association-b" {
   subnet_id      = aws_subnet.subnet-b.id
   route_table_id = aws_route_table.primary-public-route-table.id
+}
+
+resource "aws_route_table_association" "primary-private-route-table-association" {
+  subnet_id      = aws_subnet.subnet-c.id
+  route_table_id = aws_route_table.primary-private-route-table.id
 }
 
 
