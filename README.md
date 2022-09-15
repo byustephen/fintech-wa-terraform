@@ -1,4 +1,4 @@
-# Terraform Prereqs
+# Terraform Prerequisites
 
 This assumes that have terraform installed on your local computer. 
 This particular code has been tested to run on the 1.2.7 version, but should work on any 1.2.x version. 
