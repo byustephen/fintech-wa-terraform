@@ -80,6 +80,6 @@ resource "aws_security_group" "primary_private_security_group" {
   }
 
   tags = {
-    Name = "Primary - Public Subnet"
+    Name = "Primary - Private Subnet"
   }
 }
