@@ -60,7 +60,7 @@ resource "aws_internet_gateway" "primary-gateway" {
 
 resource "aws_eip" "primary-eip-nat" {
   tags = {
-    Name = "Primary"
+    Name = "Primary - Nat"
   }
 }
 
