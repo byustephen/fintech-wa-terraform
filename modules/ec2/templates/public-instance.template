@@ -2,7 +2,7 @@
 package_update: true
 write_files:
 - path: /var/www/html/status.html
-  permissions: '0755'
+  permissions: '0744'
   owner: root:root
   content: |
     <html>
@@ -14,10 +14,24 @@ write_files:
         <p>It Works!</p>
     </body>
     </html>
+- path: /etc/nginx/sites-available/status
+  permission: '0755'
+  owner: root:root
+  content: |
+    server {
+      listen 80 default_server;
+      root /var/www/html;
+      index status.html;
+      server_name _;
+      location / {
+        try_files $uri $uri/ =404;
+      }
+    }
 runcmd:
  - sudo apt-get -y install nginx
  - sudo ufw allow 'Nginx HTTP'
  - sudo systemctl enable nginx
  - sudo rm /etc/nginx/sites-available/default
  - sudo rm /etc/nginx/sites-enabled/default
- - sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+ - sudo ln -s /etc/nginx/sites-available/status /etc/nginx/sites-enabled/
+ - sudo service nginx restart
