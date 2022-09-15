@@ -11,6 +11,31 @@ resource "aws_security_group" "primary_public_security_group" {
     description = "VPC - SSH"
   }
 
+
+
+
+
+
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "VPC - SSH"
+  }
+
+
+
+
+
+
+
+
+
+
+
+
   ingress{
     cidr_blocks = ["0.0.0.0/0"]
     from_port = 80

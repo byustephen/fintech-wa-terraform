@@ -1,0 +1,23 @@
+#cloud-config
+package_update: true
+write_files:
+- path: /var/www/html/status.html
+  permissions: '0755'
+  owner: root:root
+  content: |
+    <html>
+    <head>
+      <title> The simplest HTML example 
+      </title>
+    </head>
+    <body>
+        <p>It Works!</p>
+    </body>
+    </html>
+runcmd:
+ - sudo apt-get -y install nginx
+ - sudo ufw allow 'Nginx HTTP'
+ - sudo systemctl enable nginx
+ - sudo rm /etc/nginx/sites-available/default
+ - sudo rm /etc/nginx/sites-enabled/default
+ - sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
