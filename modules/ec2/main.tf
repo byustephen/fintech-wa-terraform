@@ -47,6 +47,7 @@ resource "aws_instance" "primary-public-instance-b" {
   }
 }  
 
+#Elastic Ips
 resource "aws_eip" "primary-eip-instance-a" {
   instance = aws_instance.primary-public-instance-a.id
   tags = {
@@ -60,3 +61,24 @@ resource "aws_eip" "primary-eip-instance-b" {
     Name = "Primary - Public Instance B"
   }
 }
+
+#Private Instance
+resource "aws_instance" "primary-private-instance-c" {
+  ami                         = "ami-0d70546e43a941d70"
+  instance_type               = "t2.large"
+  subnet_id                   = var.subnet_ids[2]
+
+  associate_public_ip_address = "true"  
+  vpc_security_group_ids      = [aws_security_group.primary_private_security_group.id]
+  disable_api_termination     = false
+
+  root_block_device {   
+    volume_type = "gp3" 
+    volume_size = 10
+    delete_on_termination = true
+  }
+  
+  tags = {
+    Name = "Primary - Private Instance B"
+  }
+}  
