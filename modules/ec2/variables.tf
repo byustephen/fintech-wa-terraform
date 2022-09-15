@@ -6,7 +6,6 @@
 #    ╚═══╝  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚══════╝╚══════╝
 #    
 
-
 variable "vpc_cidr" {
   type        = string
   description = "The full cidr block of the vpc" 

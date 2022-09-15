@@ -6,23 +6,10 @@
 #  ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝
 #   
 
-#TODO: delete keypair from instances as well. 
-#TODO: change ssh from anywhere rule. 
-
-#Delete Before Submitting
-resource "aws_key_pair" "deployer" {
-  key_name   = "deployer-key"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDN4wX3fm82YuKplfhFavLFuRtCdbhx3o3OC6eQxmL3nw8wpDEbasnG+08jVNosiS42g0db9FcyJjlgLkr1FU6o3avzx8Vg5VHnYNjrowMfgExtyfW+lO9yyeldrMxrKwKUiQkB18F83pm6O1EfHQBvWqrGDdky0SZBq5I+btccnfTUOGO6KIRHhwA9REFRVDHWVKTNHSYBQoO0d27CMPYRQHpF9dUuaReThQE2C6KohDUdoluXPfv933Yj1f1Eelzzo/pAS5fG54zCSa3ehOgiW3LQInGP9UZ4JPh5wGLiv/7k9MxNFmoEOrEXHOuaLTLkwsbswj9Jk2/+JyZLD6T1"
-}
-
 resource "aws_instance" "primary-public-instance-a" {
   ami                         = "ami-0d70546e43a941d70"
   instance_type               = "t2.small"
   subnet_id                   = var.subnet_ids[0]
-
-  #TODO - delete
-  key_name = "deployer-key"
-
 
   associate_public_ip_address = "true"  
   vpc_security_group_ids      = [aws_security_group.primary_public_security_group.id]
@@ -45,10 +32,6 @@ resource "aws_instance" "primary-public-instance-b" {
   ami                         = "ami-0d70546e43a941d70"
   instance_type               = "t2.small"
   subnet_id                   = var.subnet_ids[1]
-
-
-  #TODO - delete
-  key_name = "deployer-key"
 
   associate_public_ip_address = "true"  
   vpc_security_group_ids      = [aws_security_group.primary_public_security_group.id]

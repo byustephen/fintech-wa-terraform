@@ -3,7 +3,16 @@ resource "aws_lb_target_group" "primary-public-target-group" {
   port     = 80
   protocol = "HTTP"
   vpc_id   = var.vpc_id
-  slow_start  = "60"
+  slow_start  = "90"
+
+  health_check {
+    path = "/status.html"
+    port = "traffic-port"
+    matcher = "200"
+    unhealthy_threshold = 3
+    healthy_threshold = 2
+    interval = 20
+  }
 }
 
 resource "aws_lb_target_group_attachment" "target-attachment-public-a" {
