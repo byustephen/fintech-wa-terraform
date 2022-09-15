@@ -1,3 +1,4 @@
+#Public subnet security group
 resource "aws_security_group" "primary_public_security_group" {
   name        = "Primary - Public Instance Security Group"
   description = "Security group to all http, https, and ssh "
@@ -10,31 +11,6 @@ resource "aws_security_group" "primary_public_security_group" {
     cidr_blocks = [var.vpc_cidr]
     description = "VPC - SSH"
   }
-
-
-
-
-
-
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-    description = "VPC - SSH"
-  }
-
-
-
-
-
-
-
-
-
-
-
 
   ingress{
     cidr_blocks = ["0.0.0.0/0"]
@@ -65,7 +41,7 @@ resource "aws_security_group" "primary_public_security_group" {
   }
 }
 
-
+#Private subnet security group
 resource "aws_security_group" "primary_private_security_group" {
   name        = "Primary - Private Instance Security Group"
   description = "Security group for ssh access, and other various ports"

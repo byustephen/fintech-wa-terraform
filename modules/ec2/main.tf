@@ -48,7 +48,7 @@ resource "aws_instance" "primary-public-instance-b" {
 
 
   #TODO - delete
-  key_name = "deployer"
+  key_name = "deployer-key"
 
   associate_public_ip_address = "true"  
   vpc_security_group_ids      = [aws_security_group.primary_public_security_group.id]
@@ -66,7 +66,7 @@ resource "aws_instance" "primary-public-instance-b" {
   }
 }  
 
-Elastic Ips
+#Elastic Ips
 resource "aws_eip" "primary-eip-instance-a" {
   instance = aws_instance.primary-public-instance-a.id
   tags = {

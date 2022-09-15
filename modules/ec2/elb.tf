@@ -3,20 +3,20 @@ resource "aws_lb_target_group" "primary-public-target-group" {
   port     = 80
   protocol = "HTTP"
   vpc_id   = var.vpc_id
-  slow_start  = "30"
+  slow_start  = "60"
 }
 
-# resource "aws_lb_target_group_attachment" "target-attachment-public-a" {
-#   target_group_arn = aws_lb_target_group.primary-public-target-group.arn
-#   target_id        = aws_instance.primary-public-instance-a.id
-#   port             = 80
-# }
+resource "aws_lb_target_group_attachment" "target-attachment-public-a" {
+  target_group_arn = aws_lb_target_group.primary-public-target-group.arn
+  target_id        = aws_instance.primary-public-instance-a.id
+  port             = 80
+}
 
-# resource "aws_lb_target_group_attachment" "target-attachment-public-b" {
-#   target_group_arn = aws_lb_target_group.primary-public-target-group.arn
-#   target_id        = aws_instance.primary-public-instance-b.id
-#   port             = 80
-# }
+resource "aws_lb_target_group_attachment" "target-attachment-public-b" {
+  target_group_arn = aws_lb_target_group.primary-public-target-group.arn
+  target_id        = aws_instance.primary-public-instance-b.id
+  port             = 80
+}
 
 resource "aws_lb" "primary-public-alb" {
   name               = "primary-public-alb"
